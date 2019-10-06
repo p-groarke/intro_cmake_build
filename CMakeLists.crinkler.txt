@@ -1,0 +1,18 @@
+cmake_minimum_required (VERSION 3.10)
+project(crinkler-download NONE)
+
+set(BUILD_TOOLS_DIR ${CMAKE_CURRENT_BINARY_DIR}/build_tools)
+set(CRINKLER_VER "20a")
+set(CRINKLER_LINK "http://www.crinkler.net/crinkler${CRINKLER_VER}.zip")
+
+file(DOWNLOAD ${CRINKLER_LINK} ${BUILD_TOOLS_DIR}/crinkler.zip)
+execute_process(
+	COMMAND ${CMAKE_COMMAND} -E tar xzf ${BUILD_TOOLS_DIR}/crinkler.zip
+	WORKING_DIRECTORY ${BUILD_TOOLS_DIR}
+)
+
+# set(CRINKLER_PATH "${BUILD_TOOLS_DIR}/crinkler${CRINKLER_VER}")
+execute_process(
+	COMMAND ${CMAKE_COMMAND} -E copy ${BUILD_TOOLS_DIR}/crinkler${CRINKLER_VER}/crinkler.exe
+	${BUILD_TOOLS_DIR}/link.exe
+)

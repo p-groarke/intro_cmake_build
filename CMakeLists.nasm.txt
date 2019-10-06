@@ -1,0 +1,14 @@
+cmake_minimum_required (VERSION 3.10)
+project(nasm-download NONE)
+
+set(BUILD_TOOLS_DIR ${CMAKE_CURRENT_BINARY_DIR}/build_tools)
+set(NASM_VER "2.13.03")
+set(NASM_LINK "https://www.nasm.us/pub/nasm/releasebuilds/${NASM_VER}/win64/nasm-${NASM_VER}-win64.zip")
+
+file(DOWNLOAD ${NASM_LINK} ${BUILD_TOOLS_DIR}/nasm.zip)
+execute_process(
+	COMMAND ${CMAKE_COMMAND} -E tar xzf ${BUILD_TOOLS_DIR}/nasm.zip
+	WORKING_DIRECTORY ${BUILD_TOOLS_DIR}
+)
+
+set(NASM_PATH "${BUILD_TOOLS_DIR}/nasm-${NASM_VER}/nasm.exe")
